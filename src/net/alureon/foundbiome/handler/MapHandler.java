@@ -50,6 +50,7 @@ public class MapHandler {
             playerMap.put(player, biomes);
         } catch (FileNotFoundException ex) {
             fb.getLogger().severe("Could not find a stats file for player!");
+            playerMap.put(player, biomes);
         } catch (ParseException ex) {
             fb.getLogger().severe("Failed to parse player json file!");
             ex.printStackTrace();

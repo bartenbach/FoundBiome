@@ -108,7 +108,7 @@ public class BiomeTranslation {
 
             /* Miscellaneous Biomes */
             case "THE_END":
-                return Biome.VOID;
+                return Biome.SKY;
             case "BEACH":
                 return Biome.BEACHES;
 
