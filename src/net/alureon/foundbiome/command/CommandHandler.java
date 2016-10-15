@@ -22,10 +22,9 @@ public class CommandHandler implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("biome") && sender instanceof Player) {
             Biome biome = ((Player) sender).getLocation().getBlock().getBiome();
-            sender.sendMessage(biome.toString());
-            sender.sendMessage(biome.name());
-            sender.sendMessage(biome.getDeclaringClass().toString());
-/*            if (fb.getMapHandler().getPlayerBiomeList((Player)sender).size() == 0) {
+            sender.sendMessage(ChatColor.AQUA + biome.name().toLowerCase().replaceAll("_", " "));
+        } else if (label.equalsIgnoreCase("biomes") && sender instanceof Player) {
+            if (fb.getMapHandler().getPlayerBiomeList((Player)sender).size() == 0) {
                 sender.sendMessage(ChatColor.GREEN + "It doesn't look like you've explored much yet");
                 return true;
             }
@@ -37,7 +36,7 @@ public class CommandHandler implements CommandExecutor {
             }
             sb.deleteCharAt(sb.length() - 2);
             sender.sendMessage(ChatColor.GREEN + "You've visited the following biomes:");
-            sender.sendMessage(sb.toString());*/
+            sender.sendMessage(sb.toString());
             return true;
         }
         return false;

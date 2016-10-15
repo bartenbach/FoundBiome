@@ -39,6 +39,7 @@ public class FoundBiome extends JavaPlugin {
         pm.registerEvents(joinListener, this);
         pm.registerEvents(moveListener, this);
         getCommand("biome").setExecutor(commandHandler);
+        getCommand("biomes").setExecutor(commandHandler);
     }
 
     public MapHandler getMapHandler() {
