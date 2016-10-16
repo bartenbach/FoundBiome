@@ -1,11 +1,9 @@
 name: FoundBiome
 main: net.alureon.foundbiome.FoundBiome
-version: 0.0.3
+version: 0.2
 author: alureon
 description: Allows players to see when they change biomes, and what biomes they have visited.
 
 commands:
-    biome:
-        description: View the name of the current biome you're in
-    biomes:
-        description: View all biomes you have visited
+    fb:
+        description: Master command for FoundBiome

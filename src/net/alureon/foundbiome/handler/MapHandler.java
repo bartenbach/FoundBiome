@@ -1,6 +1,5 @@
 package net.alureon.foundbiome.handler;
 
-import net.alureon.foundbiome.BiomeTranslation;
 import net.alureon.foundbiome.FoundBiome;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
@@ -35,7 +34,7 @@ public class MapHandler {
             String uuid = player.getUniqueId().toString();
 
             // get the player's json stats file
-            File worldFolder = fb.getServer().getWorld("world").getWorldFolder();
+            File worldFolder = fb.getServer().getWorld(player.getWorld().getName()).getWorldFolder();
             String statFile = worldFolder.getAbsolutePath() + "\\stats\\" + uuid + ".json";
             Object obj = parser.parse(new FileReader(statFile));
             JSONObject jsonObject = (JSONObject) obj;
@@ -45,7 +44,7 @@ public class MapHandler {
             // parse biome array and translate
             for (Object o : biomeArray) {
                 // Bukkit biomes are different from this list because...Logic.
-                biomes.add(BiomeTranslation.translateBiome(o.toString().toUpperCase().replace(" ", "_")));
+                biomes.add(fb.getBiomeTranslation().translateBiome(o.toString().toLowerCase()));
             }
             playerMap.put(player, biomes);
         } catch (FileNotFoundException ex) {

@@ -2,6 +2,7 @@ package net.alureon.foundbiome.listener;
 
 
 import net.alureon.foundbiome.FoundBiome;
+import org.apache.commons.lang.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.event.EventHandler;
@@ -28,7 +29,7 @@ public class PlayerMoveListener implements Listener {
             if (!biomeList.contains(event.getTo().getBlock().getBiome())) {
                 biomeList.add(event.getTo().getBlock().getBiome());
                 event.getPlayer().sendMessage(ChatColor.GREEN + "You've found a " + ChatColor.AQUA
-                        + event.getTo().getBlock().getBiome().name().toLowerCase().replaceAll("_", " ")
+                        + WordUtils.capitalize(fb.getBiomeTranslation().translateBiome(event.getTo().getBlock().getBiome()))
                         + ChatColor.GREEN + " biome");
             }
         }

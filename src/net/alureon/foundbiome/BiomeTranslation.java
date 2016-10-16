@@ -1,120 +1,90 @@
 package net.alureon.foundbiome;
 
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.bukkit.block.Biome;
 
 
 public class BiomeTranslation {
 
 
-    public static Biome translateBiome(String name) {
-        switch (name) {
+    private DualHashBidiMap<String, Biome> biomeMap = new DualHashBidiMap<>();
 
 
-            /* Forest Biomes */
-            case "BIRCH_FOREST_HILLS_M":
-                return Biome.MUTATED_BIRCH_FOREST_HILLS;
-            case "ROOFED_FOREST_M":
-                return Biome.MUTATED_ROOFED_FOREST;
-            case "FORESTHILLS":
-                return Biome.FOREST_HILLS;
-            case "FLOWER_FOREST":
-                return Biome.MUTATED_FOREST;
+    public BiomeTranslation() {
+        biomeMap.put("ocean", Biome.OCEAN);
+        biomeMap.put("plains", Biome.PLAINS);
+        biomeMap.put("desert", Biome.DESERT);
+        biomeMap.put("extreme hills", Biome.EXTREME_HILLS);
+        biomeMap.put("forest", Biome.FOREST);
+        biomeMap.put("taiga", Biome.TAIGA);
+        biomeMap.put("swampland", Biome.SWAMPLAND);
+        biomeMap.put("river", Biome.RIVER);
+        biomeMap.put("hell", Biome.HELL);
+        biomeMap.put("the end", Biome.SKY);
+        biomeMap.put("frozenocean", Biome.FROZEN_OCEAN);
+        biomeMap.put("frozenriver", Biome.FROZEN_RIVER);
+        biomeMap.put("ice plains", Biome.ICE_FLATS);
+        biomeMap.put("ice mountains", Biome.ICE_MOUNTAINS);
+        biomeMap.put("mushroomisland", Biome.MUSHROOM_ISLAND);
+        biomeMap.put("mushroomislandshore", Biome.MUSHROOM_ISLAND_SHORE);
+        biomeMap.put("beach", Biome.BEACHES);
+        biomeMap.put("deserthills", Biome.DESERT_HILLS);
+        biomeMap.put("foresthills", Biome.FOREST_HILLS);
+        biomeMap.put("taigahills", Biome.TAIGA_HILLS);
+        biomeMap.put("extreme hills edge", Biome.SMALLER_EXTREME_HILLS);
+        biomeMap.put("jungle", Biome.JUNGLE);
+        biomeMap.put("junglehills", Biome.JUNGLE_HILLS);
+        biomeMap.put("jungleedge", Biome.JUNGLE_EDGE);
+        biomeMap.put("deep ocean", Biome.DEEP_OCEAN);
+        biomeMap.put("stone beach", Biome.STONE_BEACH);
+        biomeMap.put("cold beach", Biome.COLD_BEACH);
+        biomeMap.put("birch forest", Biome.BIRCH_FOREST);
+        biomeMap.put("birch forest hills", Biome.BIRCH_FOREST_HILLS);
+        biomeMap.put("roofed forest", Biome.ROOFED_FOREST);
+        biomeMap.put("cold taiga", Biome.TAIGA_COLD);
+        biomeMap.put("cold taiga hills", Biome.TAIGA_COLD_HILLS);
+        biomeMap.put("mega taiga", Biome.REDWOOD_TAIGA);
+        biomeMap.put("mega taiga hills", Biome.REDWOOD_TAIGA_HILLS);
+        biomeMap.put("extreme hills+", Biome.EXTREME_HILLS_WITH_TREES);
+        biomeMap.put("savanna", Biome.SAVANNA);
+        biomeMap.put("savanna plateau", Biome.SAVANNA_ROCK);
+        biomeMap.put("mesa", Biome.MESA);
+        biomeMap.put("mesa plateau f", Biome.MESA_ROCK);
+        biomeMap.put("mesa plateau", Biome.MESA_CLEAR_ROCK);
+        biomeMap.put("the void", Biome.VOID);
+        biomeMap.put("sunflower plains", Biome.MUTATED_PLAINS);
+        biomeMap.put("desert m", Biome.MUTATED_DESERT);
+        biomeMap.put("extreme hills m", Biome.MUTATED_EXTREME_HILLS);
+        biomeMap.put("flower forest", Biome.MUTATED_FOREST);
+        biomeMap.put("taiga m", Biome.MUTATED_TAIGA);
+        biomeMap.put("swampland m", Biome.MUTATED_SWAMPLAND);
+        biomeMap.put("ice plains spikes", Biome.MUTATED_ICE_FLATS);
+        biomeMap.put("jungle m", Biome.MUTATED_JUNGLE);
+        biomeMap.put("jungleedge m", Biome.MUTATED_JUNGLE_EDGE);
+        biomeMap.put("birch forest m", Biome.MUTATED_BIRCH_FOREST);
+        biomeMap.put("birch forest hills m", Biome.MUTATED_BIRCH_FOREST_HILLS);
+        biomeMap.put("roofed forest m", Biome.MUTATED_ROOFED_FOREST);
+        biomeMap.put("cold taiga m", Biome.MUTATED_TAIGA_COLD);
+        biomeMap.put("mega spruce taiga", Biome.MUTATED_REDWOOD_TAIGA);
+        biomeMap.put("redwood taiga hills m", Biome.MUTATED_REDWOOD_TAIGA_HILLS);
+        biomeMap.put("extreme hills+ m", Biome.MUTATED_EXTREME_HILLS_WITH_TREES);
+        biomeMap.put("savanna m", Biome.MUTATED_SAVANNA);
+        biomeMap.put("savanna plateau m", Biome.MUTATED_SAVANNA_ROCK);
+        biomeMap.put("mesa (bryce)", Biome.MUTATED_MESA);
+        biomeMap.put("mesa plateau f m", Biome.MUTATED_MESA_ROCK);
+        biomeMap.put("mesa plateau m", Biome.MUTATED_MESA_CLEAR_ROCK);
+    }
 
 
-            /* Plains Biomes */
-            case "SUNFLOWER_PLAINS":
-                return Biome.MUTATED_PLAINS;
+    public Biome translateBiome(String name) {
+        return biomeMap.get(name);
+    }
 
+    public String translateBiome(Biome biome) {
+        return biomeMap.getKey(biome);
+    }
 
-            /* Desert Biomes */
-            case "DESERT_M":
-                return Biome.MUTATED_DESERT;
-            case "DESERTHILLS":
-                return Biome.DESERT_HILLS;
-
-
-            /* Taiga Biomes */
-            case "COLD_TAIGA":
-                return Biome.TAIGA_COLD;
-            case "MEGA_TAIGA":
-                return Biome.REDWOOD_TAIGA;
-            case "MEGA_TAIGA_HILLS":
-                return Biome.REDWOOD_TAIGA_HILLS;
-            case "MEGA_SPRUCE_TAIGA":
-                return Biome.MUTATED_REDWOOD_TAIGA;
-            case "TAIGA_M":
-                return Biome.MUTATED_TAIGA;
-            case "TAIGAHILLS":
-                return Biome.TAIGA_HILLS;
-
-
-            /* Jungle Biomes */
-            case "JUNGLEHILLS":
-                return Biome.JUNGLE_HILLS;
-            case "JUNGLEEDGE":
-                return Biome.JUNGLE_EDGE;
-            case "JUNGLE_M":
-                return Biome.MUTATED_JUNGLE;
-
-
-            /* Mesa Biomes */
-            case "MESA_PLATEAU_F":
-                return Biome.MESA_ROCK;
-            case "MESA_PLATEAU":
-                return Biome.MESA_CLEAR_ROCK;
-            case "MESA_(BRYCE)":
-                return Biome.MUTATED_MESA;
-            case "MESA_PLATEAU_F_M":
-                return Biome.MUTATED_MESA_ROCK;
-            case "MESA_PLATEAU_M":
-                return Biome.MUTATED_MESA_CLEAR_ROCK;
-
-
-            /* Extreme Hills Biomes */
-            case "EXTREME_HILLS+":
-                return Biome.EXTREME_HILLS_WITH_TREES;
-            case "EXTREME_HILLS+_M":
-                return Biome.MUTATED_EXTREME_HILLS_WITH_TREES;
-            case "EXTREME_HILLS_EDGE":
-                return Biome.SMALLER_EXTREME_HILLS;
-            case "EXTREME_HILLS_M":
-                return Biome.MUTATED_EXTREME_HILLS;
-
-
-            /* Snow Biomes */
-            case "ICE_PLAINS_SPIKES":
-                return Biome.MUTATED_ICE_FLATS;
-            case "ICE_PLAINS":
-                return Biome.ICE_FLATS;
-            case "FROZENRIVER":
-                return Biome.FROZEN_RIVER;
-
-
-            /* Savanna Biomes */
-            case "SAVANNA_PLATEAU_M":
-                return Biome.MUTATED_SAVANNA_ROCK;
-            case "SAVANNA_PLATEAU":
-                return Biome.SAVANNA_ROCK;
-            case "SAVANNA_M":
-                return Biome.MUTATED_SAVANNA;
-
-
-            /* Mushroom Biomes */
-            case "MUSHROOMISLAND":
-                return Biome.MUSHROOM_ISLAND;
-            case "MUSHROOMISLANDSHORE":
-                return Biome.MUSHROOM_ISLAND_SHORE;
-
-
-            /* Miscellaneous Biomes */
-            case "THE_END":
-                return Biome.SKY;
-            case "BEACH":
-                return Biome.BEACHES;
-
-
-            default:
-                return Biome.valueOf(name);
-        }
+    public DualHashBidiMap getBiomeMap() {
+        return biomeMap;
     }
 }
