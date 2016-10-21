@@ -6,6 +6,9 @@ public class FileHandler {
 
 
     private FoundBiome fb;
+    public static String worldName;
+    public static boolean broadcast;
+    public static boolean useActionBar;
 
 
     public FileHandler(FoundBiome fb) {
@@ -17,6 +20,10 @@ public class FileHandler {
             fb.getDataFolder().mkdirs();
         }
         fb.getConfig().options().copyDefaults(true);
-        fb.saveDefaultConfig();
+        fb.saveConfig();
+
+        this.worldName = fb.getConfig().getString(Paths.worldName);
+        this.broadcast = fb.getConfig().getBoolean(Paths.broadcast);
+        this.useActionBar = fb.getConfig().getBoolean(Paths.useActionBar);
     }
 }

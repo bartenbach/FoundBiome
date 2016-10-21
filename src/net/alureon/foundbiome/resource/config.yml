@@ -1,2 +1,4 @@
 FoundBiome Configuration:
     Broadcast: false
+    World Name: world
+    Use Action Bar: true

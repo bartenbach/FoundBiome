@@ -2,6 +2,8 @@ package net.alureon.foundbiome;
 
 
 import net.alureon.foundbiome.command.CommandHandler;
+import net.alureon.foundbiome.file.ActionBarHandler;
+import net.alureon.foundbiome.file.FileHandler;
 import net.alureon.foundbiome.handler.MapHandler;
 import net.alureon.foundbiome.listener.PlayerJoinListener;
 import net.alureon.foundbiome.listener.PlayerMoveListener;
@@ -37,13 +39,16 @@ public class FoundBiome extends JavaPlugin {
 
     private final PlayerJoinListener joinListener = new PlayerJoinListener(this);
     private final PlayerMoveListener moveListener = new PlayerMoveListener(this);
+    private final ActionBarHandler actionBarHandler = new ActionBarHandler(this);
     private final CommandHandler commandHandler = new CommandHandler(this);
     private final MapHandler mapHandler = new MapHandler(this);
     private BiomeTranslation biomeTranslation;
+    private final FileHandler fh = new FileHandler(this);
 
 
     public void onEnable() {
         loadJar();
+        fh.checkFiles();
         biomeTranslation = new BiomeTranslation();
         PluginManager pm = Bukkit.getServer().getPluginManager();
         pm.registerEvents(joinListener, this);
@@ -62,7 +67,9 @@ public class FoundBiome extends JavaPlugin {
     private void loadJar() {
         try {
             final File[] libs = new File[] {
-                    new File(getDataFolder(), "commons-collections4-4.1.jar") };
+                    new File(getDataFolder(), "commons-collections4-4.1.jar")
+                    , new File(getDataFolder(), "ActionBarAPI.jar")
+            };
             for (final File lib : libs) {
                 if (!lib.exists()) {
                     JarUtils.extractFromJar(lib.getName(),
@@ -72,7 +79,7 @@ public class FoundBiome extends JavaPlugin {
             for (final File lib : libs) {
                 if (!lib.exists()) {
                     getLogger().warning(
-                            "There was a critical error loading My plugin! Could not find lib: "
+                            "There was a critical error loading FoundBiome - Could not find lib: "
                                     + lib.getName());
                     Bukkit.getServer().getPluginManager().disablePlugin(this);
                     return;

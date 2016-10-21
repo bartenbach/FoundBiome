@@ -36,6 +36,8 @@ public class CommandHandler implements CommandExecutor {
                 return true;
             } else if (args[0].equalsIgnoreCase("unseen")) {
                 getUnseenBiomes(sender);
+            } else if (args[0].equalsIgnoreCase("version")) {
+                sender.sendMessage(ChatColor.AQUA + fb.getDescription().getVersion());
             }
         }
         return false;
@@ -85,7 +87,11 @@ public class CommandHandler implements CommandExecutor {
         Biome biome = ((Player) sender).getLocation().getBlock().getBiome();
         String biomeName = fb.getBiomeTranslation().translateBiome(biome);
         sender.sendMessage(ChatColor.GREEN + "You're currently in the following biome:");
-        sender.sendMessage(ChatColor.AQUA + WordUtils.capitalize(biomeName));
+        if (biomeName != null) {
+            sender.sendMessage(ChatColor.AQUA + WordUtils.capitalize(biomeName));
+        } else {
+            sender.sendMessage(ChatColor.AQUA + WordUtils.capitalize(biome.name().replaceAll("_", " ").toLowerCase()));
+        }
     }
 }
 
