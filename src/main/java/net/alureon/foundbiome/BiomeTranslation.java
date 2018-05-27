@@ -14,7 +14,7 @@ public class BiomeTranslation {
         biomeMap.put("ocean", Biome.OCEAN);
         biomeMap.put("plains", Biome.PLAINS);
         biomeMap.put("desert", Biome.DESERT);
-        biomeMap.put("extreme hills", Biome.EXTREME_HILLS);
+        biomeMap.put("extreme_hills", Biome.EXTREME_HILLS);
         biomeMap.put("forest", Biome.FOREST);
         biomeMap.put("taiga", Biome.TAIGA);
         biomeMap.put("swampland", Biome.SWAMPLAND);
@@ -29,7 +29,7 @@ public class BiomeTranslation {
         biomeMap.put("mushroomislandshore", Biome.MUSHROOM_ISLAND_SHORE);
         biomeMap.put("beach", Biome.BEACHES);
         biomeMap.put("deserthills", Biome.DESERT_HILLS);
-        biomeMap.put("foresthills", Biome.FOREST_HILLS);
+        biomeMap.put("forest_hills", Biome.FOREST_HILLS);
         biomeMap.put("taigahills", Biome.TAIGA_HILLS);
         biomeMap.put("extreme hills edge", Biome.SMALLER_EXTREME_HILLS);
         biomeMap.put("jungle", Biome.JUNGLE);

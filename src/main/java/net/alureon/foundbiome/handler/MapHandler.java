@@ -4,7 +4,6 @@ import net.alureon.foundbiome.FoundBiome;
 import net.alureon.foundbiome.file.FileHandler;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -13,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -36,19 +36,23 @@ public class MapHandler {
 
             // get the player's json stats file
             File worldFolder = fb.getServer().getWorld(FileHandler.worldName).getWorldFolder();
-            String statFile = worldFolder.getAbsolutePath() + "\\stats\\" + uuid + ".json";
-            if (new File(statFile).exists()) {
-                System.out.println("Stat file does not exist for player " + );
+            Path worldFolderPath = worldFolder.toPath();
+            Path statsFile = worldFolderPath.resolve("advancements").resolve(uuid + ".json");
+
+            if (!statsFile.toFile().exists()) {
+                System.out.println("Unable to find stats file for player: " + player.getName());
+                System.out.println("Path: " + statsFile.toString());
             }
-            Object obj = parser.parse(new FileReader(statFile));
+
+            Object obj = parser.parse(new FileReader(statsFile.toFile()));
             JSONObject jsonObject = (JSONObject) obj;
-            JSONObject biomeObject = (JSONObject) jsonObject.get("achievement.exploreAllBiomes");
-            JSONArray biomeArray = (JSONArray) biomeObject.get("progress");
+            JSONObject achievementObject = (JSONObject) jsonObject.get("minecraft:adventure/adventuring_time");
+            JSONObject criteriaObject = (JSONObject) achievementObject.get("criteria");
 
             // parse biome array and translate
-            for (Object o : biomeArray) {
+            for (Object o : criteriaObject.keySet()) {
                 // Bukkit biomes are different from this list because...Logic.
-                biomes.add(fb.getBiomeTranslation().translateBiome(o.toString().toLowerCase()));
+                biomes.add(fb.getBiomeTranslation().translateBiome(o.toString()));
             }
             playerMap.put(player, biomes);
         } catch (FileNotFoundException ex) {

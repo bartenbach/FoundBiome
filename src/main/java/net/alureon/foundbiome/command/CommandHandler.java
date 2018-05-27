@@ -75,7 +75,7 @@ public class CommandHandler implements CommandExecutor {
         StringBuilder sb = new StringBuilder();
         sb.append(ChatColor.AQUA);
         for (Biome b : fb.getMapHandler().getPlayerBiomeList((Player) sender)) {
-            sb.append(WordUtils.capitalizeFully(fb.getBiomeTranslation().translateBiome(b)));
+            sb.append(WordUtils.capitalizeFully(fb.getBiomeTranslation().translateBiome(b)).replaceAll("_", " "));
             sb.append(", ");
         }
         sb.deleteCharAt(sb.length() - 2);

@@ -2,7 +2,6 @@ package net.alureon.foundbiome;
 
 
 import net.alureon.foundbiome.command.CommandHandler;
-import net.alureon.foundbiome.file.ActionBarHandler;
 import net.alureon.foundbiome.file.FileHandler;
 import net.alureon.foundbiome.handler.MapHandler;
 import net.alureon.foundbiome.listener.PlayerJoinListener;
@@ -39,7 +38,6 @@ public class FoundBiome extends JavaPlugin {
 
     private final PlayerJoinListener joinListener = new PlayerJoinListener(this);
     private final PlayerMoveListener moveListener = new PlayerMoveListener(this);
-    private final ActionBarHandler actionBarHandler = new ActionBarHandler(this);
     private final CommandHandler commandHandler = new CommandHandler(this);
     private final MapHandler mapHandler = new MapHandler(this);
     private BiomeTranslation biomeTranslation;
@@ -68,7 +66,6 @@ public class FoundBiome extends JavaPlugin {
         try {
             final File[] libs = new File[]{
                     new File(getDataFolder(), "commons-collections4-4.1.jar")
-                    , new File(getDataFolder(), "ActionBarAPI.jar")
             };
             for (final File lib : libs) {
                 if (!lib.exists()) {
