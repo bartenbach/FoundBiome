@@ -1,7 +1,7 @@
 package net.alureon.foundbiome.command;
 
 import net.alureon.foundbiome.FoundBiome;
-import org.apache.commons.lang.WordUtils;
+import org.apache.commons.text.WordUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.command.Command;

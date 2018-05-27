@@ -1,7 +1,7 @@
 package net.alureon.foundbiome.file;
 
 
-import me.Senneistheboss.abapi.ActionBarAPI;
+import com.connorlinfoot.actionbarapi.ActionBarAPI;
 import net.alureon.foundbiome.FoundBiome;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -18,14 +18,14 @@ public class ActionBarHandler {
     }
 
     public static void sendActionBar(final Player player, final String message, int duration, Plugin instance) {
-        ActionBarAPI.send(message, player);
+        ActionBarAPI.sendActionBar(player, message);
 
         if (duration >= 0) {
             // Sends empty message at the end of the duration. Allows messages shorter than 3 seconds, ensures precision.
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    ActionBarAPI.send("", player);
+                    ActionBarAPI.sendActionBar(player, "");
                 }
             }.runTaskLater(instance, duration + 1);
         }
@@ -37,7 +37,7 @@ public class ActionBarHandler {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    ActionBarAPI.send(message, player);
+                    ActionBarAPI.sendActionBar(player, message);
                 }
             }.runTaskLater(instance, (long) sched);
         }

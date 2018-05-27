@@ -5,3 +5,5 @@ FoundBiome.iml
 .gitignore~
 README.md~
 .README.md.un~
+dependency-reduced-pom.xml
+target/*

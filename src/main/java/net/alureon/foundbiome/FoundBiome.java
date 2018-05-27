@@ -66,21 +66,19 @@ public class FoundBiome extends JavaPlugin {
 
     private void loadJar() {
         try {
-            final File[] libs = new File[] {
+            final File[] libs = new File[]{
                     new File(getDataFolder(), "commons-collections4-4.1.jar")
                     , new File(getDataFolder(), "ActionBarAPI.jar")
             };
             for (final File lib : libs) {
                 if (!lib.exists()) {
-                    JarUtils.extractFromJar(lib.getName(),
-                            lib.getAbsolutePath());
+                    JarUtils.extractFromJar(lib.getName(), lib.getAbsolutePath());
                 }
             }
             for (final File lib : libs) {
                 if (!lib.exists()) {
                     getLogger().warning(
-                            "There was a critical error loading FoundBiome - Could not find lib: "
-                                    + lib.getName());
+                            "There was a critical error loading FoundBiome - Could not find lib: " + lib.getName());
                     Bukkit.getServer().getPluginManager().disablePlugin(this);
                     return;
                 }
@@ -92,18 +90,15 @@ public class FoundBiome extends JavaPlugin {
     }
 
     private void addClassPath(final URL url) throws IOException {
-        final URLClassLoader sysloader = (URLClassLoader) ClassLoader
-                .getSystemClassLoader();
+        final URLClassLoader sysloader = (URLClassLoader) ClassLoader.getSystemClassLoader();
         final Class<URLClassLoader> sysclass = URLClassLoader.class;
         try {
-            final Method method = sysclass.getDeclaredMethod("addURL",
-                    new Class[] { URL.class });
+            final Method method = sysclass.getDeclaredMethod("addURL", new Class[]{URL.class});
             method.setAccessible(true);
-            method.invoke(sysloader, new Object[] { url });
+            method.invoke(sysloader, new Object[]{url});
         } catch (final Throwable t) {
             t.printStackTrace();
-            throw new IOException("Error adding " + url
-                    + " to system classloader");
+            throw new IOException("Error adding " + url + " to system classloader");
         }
     }
 

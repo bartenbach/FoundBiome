@@ -2,7 +2,6 @@ package net.alureon.foundbiome.handler;
 
 import net.alureon.foundbiome.FoundBiome;
 import net.alureon.foundbiome.file.FileHandler;
-import net.alureon.foundbiome.file.Paths;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONArray;
@@ -38,6 +37,9 @@ public class MapHandler {
             // get the player's json stats file
             File worldFolder = fb.getServer().getWorld(FileHandler.worldName).getWorldFolder();
             String statFile = worldFolder.getAbsolutePath() + "\\stats\\" + uuid + ".json";
+            if (new File(statFile).exists()) {
+                System.out.println("Stat file does not exist for player " + );
+            }
             Object obj = parser.parse(new FileReader(statFile));
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject biomeObject = (JSONObject) jsonObject.get("achievement.exploreAllBiomes");
