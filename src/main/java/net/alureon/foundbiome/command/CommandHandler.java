@@ -50,12 +50,12 @@ public class CommandHandler implements CommandExecutor {
 
     private void getUnseenBiomes(CommandSender sender) {
         StringBuilder sb = new StringBuilder();
-        sb.append(ChatColor.AQUA);
         ArrayList<Biome> playerBiomes = fb.getMapHandler().getPlayerBiomeList((Player) sender);
+        int i = 0;
         for (Biome b : Biome.values()) {
-            if (!playerBiomes.contains(b)) {
-                sb.append(BiomeFormatter.formatBiome(b));
-                sb.append(", ");
+            if (!playerBiomes.contains(b) && b != Biome.HELL && b != Biome.SKY && b != Biome.VOID) {
+                appendColoredBiome(sb, b, i);
+                i++;
             }
         }
         sb.deleteCharAt(sb.length() - 2);
@@ -70,9 +70,10 @@ public class CommandHandler implements CommandExecutor {
         }
         StringBuilder sb = new StringBuilder();
         sb.append(ChatColor.AQUA);
+        int i = 0;
         for (Biome b : fb.getMapHandler().getPlayerBiomeList((Player) sender)) {
-            sb.append(BiomeFormatter.formatBiome(b));
-            sb.append(", ");
+            appendColoredBiome(sb, b, i);
+            i++;
         }
         sb.deleteCharAt(sb.length() - 2);
         sender.sendMessage(ChatColor.GREEN + "You've visited the following biomes:");
@@ -83,6 +84,25 @@ public class CommandHandler implements CommandExecutor {
         Biome biome = ((Player) sender).getLocation().getBlock().getBiome();
         sender.sendMessage(ChatColor.GREEN + "You're currently in the following biome:");
         sender.sendMessage(ChatColor.AQUA + BiomeFormatter.formatBiome(biome));
+    }
+
+    /**
+     * For the sake of readability (there are quite a few biomes to print out), this method takes a number.
+     * As long as the number increments, it will return a different color every time it is called, alternating
+     * between Aqua and Dark Aqua.  It will append the colored biome to the provided StringBuilder object.
+     * @param sb The StringBuilder to append to.
+     * @param b The Biome whose name will be appended.
+     * @param color A number, which if even will return a dark aqua string. If odd, aqua.
+     */
+    private void appendColoredBiome(StringBuilder sb, Biome b, int color) {
+        if (color % 2 == 0) {
+            sb.append(ChatColor.DARK_AQUA);
+        } else {
+            sb.append(ChatColor.AQUA);
+        }
+        sb.append(BiomeFormatter.formatBiome(b));
+        sb.append(ChatColor.WHITE);
+        sb.append(", ");
     }
 }
 
