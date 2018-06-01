@@ -28,7 +28,7 @@ public class MapHandler {
     }
 
     public void addToMap(Player player) {
-        ArrayList<Biome> biomes = new ArrayList<Biome>();
+        ArrayList<Biome> biomes = new ArrayList<>(Biome.values().length); // init arraylist to max size
         JSONParser parser = new JSONParser();
         try {
             // get the player's UUID for the stats file
@@ -51,12 +51,11 @@ public class MapHandler {
 
             // parse biome array and translate
             for (Object o : criteriaObject.keySet()) {
-                // Bukkit biomes are different from this list because...Logic.
-                biomes.add(fb.getBiomeTranslation().translateBiome(o.toString()));
+                biomes.add(Biome.valueOf(o.toString().toUpperCase()));
             }
             playerMap.put(player, biomes);
         } catch (FileNotFoundException ex) {
-            fb.getLogger().severe("Could not find a stats file for player!");
+            fb.getLogger().severe("Could not find a stats file for player! (maybe they don't have one? creating new map for them)");
             playerMap.put(player, biomes);
         } catch (ParseException ex) {
             fb.getLogger().severe("Failed to parse player json file!");

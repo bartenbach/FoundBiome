@@ -40,14 +40,12 @@ public class FoundBiome extends JavaPlugin {
     private final PlayerMoveListener moveListener = new PlayerMoveListener(this);
     private final CommandHandler commandHandler = new CommandHandler(this);
     private final MapHandler mapHandler = new MapHandler(this);
-    private BiomeTranslation biomeTranslation;
     private final FileHandler fh = new FileHandler(this);
 
 
     public void onEnable() {
         loadJar();
         fh.checkFiles();
-        biomeTranslation = new BiomeTranslation();
         PluginManager pm = Bukkit.getServer().getPluginManager();
         pm.registerEvents(joinListener, this);
         pm.registerEvents(moveListener, this);
@@ -56,10 +54,6 @@ public class FoundBiome extends JavaPlugin {
 
     public MapHandler getMapHandler() {
         return mapHandler;
-    }
-
-    public BiomeTranslation getBiomeTranslation() {
-        return biomeTranslation;
     }
 
     private void loadJar() {
@@ -82,6 +76,7 @@ public class FoundBiome extends JavaPlugin {
                 addClassPath(JarUtils.getJarUrl(lib));
             }
         } catch (final Exception e) {
+            this.getServer().getLogger().severe("Failed to load libs!");
             e.printStackTrace();
         }
     }

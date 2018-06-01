@@ -1,7 +1,7 @@
 package net.alureon.foundbiome.command;
 
 import net.alureon.foundbiome.FoundBiome;
-import org.apache.commons.text.WordUtils;
+import net.alureon.foundbiome.util.BiomeFormatter;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.command.Command;
@@ -10,8 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
 
 public class CommandHandler implements CommandExecutor {
 
@@ -53,12 +51,10 @@ public class CommandHandler implements CommandExecutor {
     private void getUnseenBiomes(CommandSender sender) {
         StringBuilder sb = new StringBuilder();
         sb.append(ChatColor.AQUA);
-        Iterator it = fb.getBiomeTranslation().getBiomeMap().entrySet().iterator();
-        ArrayList<Biome> playerBiomes = fb.getMapHandler().getPlayerBiomeList((Player)sender);
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-            if (!playerBiomes.contains((Biome)pair.getValue())) {
-                sb.append(WordUtils.capitalizeFully(fb.getBiomeTranslation().translateBiome((Biome)pair.getValue())));
+        ArrayList<Biome> playerBiomes = fb.getMapHandler().getPlayerBiomeList((Player) sender);
+        for (Biome b : Biome.values()) {
+            if (!playerBiomes.contains(b)) {
+                sb.append(BiomeFormatter.formatBiome(b));
                 sb.append(", ");
             }
         }
@@ -75,7 +71,7 @@ public class CommandHandler implements CommandExecutor {
         StringBuilder sb = new StringBuilder();
         sb.append(ChatColor.AQUA);
         for (Biome b : fb.getMapHandler().getPlayerBiomeList((Player) sender)) {
-            sb.append(WordUtils.capitalizeFully(fb.getBiomeTranslation().translateBiome(b)).replaceAll("_", " "));
+            sb.append(BiomeFormatter.formatBiome(b));
             sb.append(", ");
         }
         sb.deleteCharAt(sb.length() - 2);
@@ -85,13 +81,8 @@ public class CommandHandler implements CommandExecutor {
 
     private void sendCurrentBiome(CommandSender sender) {
         Biome biome = ((Player) sender).getLocation().getBlock().getBiome();
-        String biomeName = fb.getBiomeTranslation().translateBiome(biome);
         sender.sendMessage(ChatColor.GREEN + "You're currently in the following biome:");
-        if (biomeName != null) {
-            sender.sendMessage(ChatColor.AQUA + WordUtils.capitalize(biomeName));
-        } else {
-            sender.sendMessage(ChatColor.AQUA + WordUtils.capitalize(biome.name().replaceAll("_", " ").toLowerCase()));
-        }
+        sender.sendMessage(ChatColor.AQUA + BiomeFormatter.formatBiome(biome));
     }
 }
 

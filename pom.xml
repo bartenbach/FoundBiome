@@ -5,7 +5,7 @@
     <groupId>net.alureon.foundbiome</groupId>
     <artifactId>FoundBiome</artifactId>
     <packaging>jar</packaging>
-    <version>0.7</version>
+    <version>0.8</version>
     <name>FoundBiome</name>
 
     <properties>
