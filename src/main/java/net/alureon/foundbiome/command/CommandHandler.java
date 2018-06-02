@@ -2,6 +2,7 @@ package net.alureon.foundbiome.command;
 
 import net.alureon.foundbiome.FoundBiome;
 import net.alureon.foundbiome.util.BiomeFormatter;
+import net.alureon.foundbiome.util.BiomeLists;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
 import org.bukkit.command.Command;
@@ -53,7 +54,12 @@ public class CommandHandler implements CommandExecutor {
         ArrayList<Biome> playerBiomes = fb.getMapHandler().getPlayerBiomeList((Player) sender);
         int i = 0;
         for (Biome b : Biome.values()) {
-            if (!playerBiomes.contains(b) && b != Biome.HELL && b != Biome.SKY && b != Biome.VOID) {
+            /*
+            A lot of biomes are disabled here.  We don't show them because they don't count towards the achievement and
+            cannot be tracked without creating extra files.
+             */
+            if (!playerBiomes.contains(b) && !BiomeLists.getDisabledBiomes().contains(b)
+                    && !b.name().startsWith("MUTATED")) {
                 appendColoredBiome(sb, b, i);
                 i++;
             }

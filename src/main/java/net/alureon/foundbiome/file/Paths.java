@@ -1,8 +1,8 @@
 package net.alureon.foundbiome.file;
 
-public class Paths {
+final class Paths {
 
-    public final static String broadcast    = "FoundBiome Configuration.Broadcast";
-    public final static String worldName    = "FoundBiome Configuration.World Name";
+    final static String broadcast    = "FoundBiome Configuration.Broadcast";
+    final static String worldName    = "FoundBiome Configuration.World Name";
 
 }

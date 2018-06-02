@@ -94,4 +94,8 @@ public class FoundBiome extends JavaPlugin {
         }
     }
 
+    public FileHandler getFileHandler() {
+        return this.fh;
+    }
+
 }

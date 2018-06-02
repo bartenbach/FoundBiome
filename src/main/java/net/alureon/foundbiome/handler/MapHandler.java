@@ -1,7 +1,6 @@
 package net.alureon.foundbiome.handler;
 
 import net.alureon.foundbiome.FoundBiome;
-import net.alureon.foundbiome.file.FileHandler;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
@@ -35,7 +34,7 @@ public class MapHandler {
             String uuid = player.getUniqueId().toString();
 
             // get the player's json stats file
-            File worldFolder = fb.getServer().getWorld(FileHandler.worldName).getWorldFolder();
+            File worldFolder = fb.getServer().getWorld(fb.getFileHandler().getWorldName()).getWorldFolder();
             Path worldFolderPath = worldFolder.toPath();
             Path statsFile = worldFolderPath.resolve("advancements").resolve(uuid + ".json");
 
