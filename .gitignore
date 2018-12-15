@@ -7,3 +7,7 @@ README.md~
 .README.md.un~
 dependency-reduced-pom.xml
 target/*
+/target/
+*.prefs
+.project
+.classpath
