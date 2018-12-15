@@ -96,16 +96,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        
-        <resources>
-			<resource>
-				<directory>src/</directory>
-				<includes>
-					<include>plugin.yml</include>
-					<include>config.yml</include>
-				</includes>
-				</resource>
-		</resources>
     </build>
 
 </project>
