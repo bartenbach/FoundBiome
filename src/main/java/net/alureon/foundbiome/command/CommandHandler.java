@@ -59,7 +59,7 @@ public class CommandHandler implements CommandExecutor {
             cannot be tracked without creating extra files.
              */
             if (!playerBiomes.contains(b) && !BiomeLists.getDisabledBiomes().contains(b)
-                    && !b.name().startsWith("MUTATED")) {
+                    && !b.name().startsWith("MUTATED") && !BiomeLists.isNonAchievementBiome(b)) {
                 appendColoredBiome(sb, b, i);
                 i++;
             }
