@@ -11,7 +11,7 @@ public class BiomeLists {
      * These biomes should never be used for anything.  They don't count towards the achievement, and there is
      * no reason to ever announce them.
      */
-    private static final List<Biome> completelyDisabledBiomes = Arrays.asList(Biome.SKY, Biome.VOID, Biome.HELL);
+    private static final List<Biome> completelyDisabledBiomes = Arrays.asList(Biome.THE_VOID);
 
     /**
      * Gets the list of disabled biomes.
