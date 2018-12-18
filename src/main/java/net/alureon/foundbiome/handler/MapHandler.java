@@ -50,7 +50,7 @@ public class MapHandler {
 
             // parse biome array and translate
             for (Object o : criteriaObject.keySet()) {
-                biomes.add(Biome.valueOf(o.toString().toUpperCase()));
+                biomes.add(Biome.valueOf(o.toString().toUpperCase().replace("MINECRAFT:", "")));
             }
             playerMap.put(player, biomes);
         } catch (FileNotFoundException ex) {

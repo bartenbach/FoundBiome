@@ -1,6 +1,7 @@
 name: FoundBiome
 main: net.alureon.foundbiome.FoundBiome
-version: 0.9
+version: 0.10-SNAPSHOT
+api-version: 1.13
 author: alureon
 description: Allows players to see when they change biomes, and what biomes they have visited.
 
